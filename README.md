@@ -19,7 +19,7 @@ ________________________________________________________________________________
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // 
 _________________________________________________________________________________________
  
-Note: These are hard-coded accoring to table design, 
+Note: These are hard-coded SQL "SELECT ('here')" accoring to table design, 
 for quick way to combine access to certain table views:
  
  1. TNX
@@ -34,8 +34,10 @@ ________________________________________________________________________________
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // 
 _________________________________________________________________________________________
  
-1. Check they are logged in isset($_SESSION['user_ID'])
+1. Get page data from DB
 2. Check they are OK to view this page (`pages` auth_level > $_SESSION['user_level'])
+    a. if not logged in >> login
+    b. else > show error message
 3. Check super vars:
     1. user_ID
     2. TNX_ID
@@ -43,6 +45,11 @@ ________________________________________________________________________________
     4. transactTime (get, or set to now)
         a. when set, set rate: rate(transactTime) - (((hi-lo)/2) + lo)
  4. set totalUsers(transactTime) (lower priority 'fun' info)
+ 5. page_head();
+ 
+ /* PAGE CONTENT GOES HERE! */
+ 
+ 6. page_foot();
  
 _________________________________________________________________________________________
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // 
@@ -189,6 +196,14 @@ ________________________________________________________________________________
 
 6. user_functions
  1. userBar($_SESSION['user_ID']) -- 
+   1. image
+   2. name
+   3. user_level
+   4. Profile
+   5. Wallet > modal popUp
+   6. ledger_action_buttons(); (balance, deposits, withdrawals, transfers, PNL)
+   6. Logout
+   7. where $_SESSION['user_level'] > 9 - 
  2. userList() -- if ($_SESSION['user_level'] >= 9)
  3. totalUsers() -- (today, week, month, year, all_time)
  4. getUser(user_ID)
@@ -217,14 +232,23 @@ ________________________________________________________________________________
 _________________________________________________________________________________________
 
 8. page_functions
+      0. first things first:
+          a. get_page_info($filename)
+          b. check_auth($page_ID, $user_level)
+          b. get / set vars? 
+             * ARRAY( TNX_ID, user_TNX_ID, user_ID, transactTime, BTC_rate, numUsers)
       1. page_head();
-          > start_page_load_time();
+          a. start_page_load_time();
+          b. page_title();
+          c. open page content section
       2. page_foot();
+          a. close page content section
       3. main_menu();
       4. beautyBox();
       5. big_info_box();
       6. wide_info_box();
-      
+      7. type_and_status_bar();
+      8. snapshot_select(); // catch vars - user_ID, TNX_ID, user_TNX_ID, transactTime
     
 _________________________________________________________________________________________
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //  
@@ -232,9 +256,18 @@ ________________________________________________________________________________
 _________________________________________________________________________________________
 
 9. table_functions 
-      1. exchange_data - (with associated user_TNX in advanced table) - add BTC_rate
+      1. exchange_data
+         a. (with associated user_TNX in advanced table) - add BTC_rate
+         b. (table: TNX & BTC rate (+ count user_TNX?))
       2. user_TNX data (JOIN exchange_data)
-      3. 
+      3. accountSummaryTable(); [user (1), ]
+      4. accountActivity(); 
+      5. historical_data (table)
+      6. exchange_data (table: TNX & BTC rate (+ count user_TNX?))
+      7. accountActivity_data (advanced_table - user_TNX + (exhcange & rate) JOINED)
+      8. fundSummaryTable(); [ALL users LOOP, UP TO NOW]
+      9. fundActivityTable();
+      10. glossary();
       
 
 _________________________________________________________________________________________
@@ -246,7 +279,12 @@ ________________________________________________________________________________
       1. register >> submit_registration >> email
       2. log_in >> log_in_check_do
       3. reset_pwd
-      4. 
+      4. send_SMS()
+      5. SMS_auth()
+         a. create code
+         b. send
+         c. write to DB
+         d. confirm: enter code, compare, update DB
       
 _________________________________________________________________________________________
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
