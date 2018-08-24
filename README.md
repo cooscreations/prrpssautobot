@@ -42,7 +42,7 @@ ________________________________________________________________________________
     3. user_TNX_ID (get, or set to $_SESSION['user_ID'])
     4. transactTime (get, or set to now)
         a. when set, set rate: rate(transactTime) - (((hi-lo)/2) + lo)
- 5. set totalUsers(transactTime) (lower priority 'fun' info)
+ 4. set totalUsers(transactTime) (lower priority 'fun' info)
  
 _________________________________________________________________________________________
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // 
@@ -51,37 +51,37 @@ ________________________________________________________________________________
 _________________________________________________________________________________________
 
 1. login > 
- 1. login_check_do > set globals / session vars
+  1. login_check_do > set globals / session vars
 2. index
- 1. redirect users to >> account_view
- 2. admin home page [NOW, ALL USERS]
-  1. title
-  2. walletBar();
-  3. beautyBox();
-  4. fundSummaryTable(); [ALL users LOOP, UP TO NOW]
-  5. fundActivityTable();
-  6. glossary();
+  1. redirect users to >> account_view
+  2. admin home page [NOW, ALL USERS]
+    1. title
+    2. walletBar();
+    3. beautyBox();
+    4. fundSummaryTable(); [ALL users LOOP, UP TO NOW]
+    5. fundActivityTable();
+    6. glossary();
 3. privacy (static HTML page)
- 1. >> user_preferences
+  1. >> user_preferences
 4. user_profile
- 1. user_profile_edit
+  1. user_profile_edit
 5. account_view
- 1. title
- 2. walletBar(); (include withdrawal amounts / cash fee etc.)
- 3. beautyBox();
- 4. summary();
- 4. glossary();
- 5. accountSummaryTable(); [user (1), ]
- 6. accountActivity(); 
- 6. historical_data (table)
- 7. exchange_data (table: TNX & BTC rate (+ count user_TNX?))
- 8. accountActivity_data (advanced_table - user_TNX + (exhcange & rate) JOINED)
- 9. TNX_view()
- 10. transfer_view(user_TNX_ID)? 
- 11. BTC_rate_view(transactTime)
- 12. deposit
- 13. withdraw
- 14. transfer
+  1. title
+  2. walletBar(); (include withdrawal amounts / cash fee etc.)
+  3. beautyBox();
+  4. summary();
+  4. glossary();
+  5. accountSummaryTable(); [user (1), ]
+  6. accountActivity(); 
+6. historical_data (table)
+7. exchange_data (table: TNX & BTC rate (+ count user_TNX?))
+8. accountActivity_data (advanced_table - user_TNX + (exhcange & rate) JOINED)
+9. TNX_view()
+10. transfer_view(user_TNX_ID)? 
+11. BTC_rate_view(transactTime)
+12. deposit
+13. withdraw
+14. transfer
  
  _________________________________________________________________________________________
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // 
@@ -109,24 +109,24 @@ ________________________________________________________________________________
 _________________________________________________________________________________________
   
 1. ledger_read_functions (...
- 1. TNX_ID         = NULL;
- 2. user_TNX_ID    = NULL;
- 3. user_ID        = NULL;
- 4. transactTime   = NULL;
- 5. type  
-  1. deposits
-  2. withdrawals
-  3. balance >> NOW + PREVIOUS (ballance +/- amount)
-  4. fees
-  5. transfers in
-  6. transfers out
-  7. payments in
-  8. payments out
- 6. view_type
-  1. one
-  2. all - true
-  3. all - after royalties
-  4. all - after withdrawalFee
+  1. TNX_ID         = NULL;
+  2. user_TNX_ID    = NULL;
+  3. user_ID        = NULL;
+  4. transactTime   = NULL;
+  5. type  
+    1. deposits
+    2. withdrawals
+    3. balance >> NOW + PREVIOUS (ballance +/- amount)
+    4. fees
+    5. transfers in
+    6. transfers out
+    7. payments in
+    8. payments out
+  6. view_type
+    1. one
+    2. all - true
+    3. all - after royalties
+    4. all - after withdrawalFee
     
 _________________________________________________________________________________________
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // 
@@ -134,10 +134,10 @@ ________________________________________________________________________________
 _________________________________________________________________________________________
 
 2. ledger_action_functions
- 1. deposit
-  1. _add
-  2. _edit / _approve
-  3. _delete
+  1. deposit
+    1. _add
+    2. _edit / _approve
+    3. _delete
  2. withdrawal_add
  3. tranfers 
      
@@ -156,23 +156,23 @@ ________________________________________________________________________________
 _________________________________________________________________________________________
 
 4. conversion_functions
- 1. sat_to_USD(sat, transactTime);
- 2. rate(transactTime); // CHANGE TO rate_BTC_to_USD ??? <<< send sats?
- 3. AUM_share( userBalance / walletBalance )
- 4. withdrawalFee() -- return: original_amount, end_amount, fee_amount
- 5. operatingFee() -- return: original_amount, end_amount, fee_amount
- 6. display_satoshi(sat_qty)
-  0. no format, number only in XBT
-  1. .= labels: 
-   1. XBT
-   2. TOTAL
-   3. FEES
-   4. % <<<<<<<< ? can we do this ?
-  2. .= add 'fab fa-bitcoin text-warning' icon
-  3. .= add USD amount & rate   (?? - should we be firing another function here?)
-  4. .= red / green / muted number for regular numbers
-  5. .= red for fees (positive number is converted to negative for red and '-' symbol in front)
-  6. .= icon for growth direction (+ = up, - = down) - icon up-arrow / down-arrow
+  1. sat_to_USD(sat, transactTime);
+  2. rate(transactTime); // CHANGE TO rate_BTC_to_USD ??? <<< send sats?
+  3. AUM_share( userBalance / walletBalance )
+  4. withdrawalFee() -- return: original_amount, end_amount, fee_amount
+  5. operatingFee() -- return: original_amount, end_amount, fee_amount
+  6. display_satoshi(sat_qty)
+    0. no format, number only in XBT
+    1. .= labels: 
+      1. XBT
+      2. TOTAL
+      3. FEES
+     4. % <<<<<<<< ? can we do this ?
+   2. .= add 'fab fa-bitcoin text-warning' icon
+   3. .= add USD amount & rate   (?? - should we be firing another function here?)
+   4. .= red / green / muted number for regular numbers
+   5. .= red for fees (positive number is converted to negative for red and '-' symbol in front)
+   6. .= icon for growth direction (+ = up, - = down) - icon up-arrow / down-arrow
 
 _________________________________________________________________________________________
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // 
@@ -200,16 +200,16 @@ ________________________________________________________________________________
 _________________________________________________________________________________________
 
 7. administration functions
- 1. show_pending_tasks() // get any records in ANY table where (record_status == 1)
- 2. import_data();
- 3. split_payment
-     a. splits_to_VIPs = ((walletBalance - prevBalance) / 2 )
-     b. user AUM share = userBalance / balance
-     c. ((user AUM share * splits_to_VIPs) * withdrawalFee)
-     d. save splits & fees to DB
- 4. backup_site
- 5. import_TNX
- 6. import_historical_data
+  1. show_pending_tasks() // get any records in ANY table where (record_status == 1)
+  2. import_data();
+  3. split_payment
+      a. splits_to_VIPs = ((walletBalance - prevBalance) / 2 )
+      b. user AUM share = userBalance / balance
+      c. ((user AUM share * splits_to_VIPs) * withdrawalFee)
+      d. save splits & fees to DB
+  4. backup_site
+  5. import_TNX
+  6. import_historical_data
     
 _________________________________________________________________________________________
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //  
