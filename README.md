@@ -93,15 +93,15 @@ ________________________________________________________________________________
  
  function_loader.php: // LOAD ALL THE FILES LISTED BELOW:
  
-      1. ledger_read_functions
-      2. ledger_action_functions
-      3. percentage_functions
-      4. conversion_functions
-      5. global functions
-      6. user_functions
-      7. administration functions
-      8. page_functions
-      9. table_functions
+  1. ledger_read_functions
+  2. ledger_action_functions
+  3. percentage_functions
+  4. conversion_functions
+  5. global functions
+  6. user_functions
+  7. administration functions
+  8. page_functions
+  9. table_functions
 
 _________________________________________________________________________________________
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // 
