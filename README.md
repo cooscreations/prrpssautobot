@@ -34,15 +34,15 @@ ________________________________________________________________________________
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // 
 _________________________________________________________________________________________
  
- 1. Check they are logged in isset($_SESSION['user_ID'])
- 2. Check they are OK to view this page (`pages` auth_level > $_SESSION['user_level'])
- 3. Check super vars:
+1. Check they are logged in isset($_SESSION['user_ID'])
+2. Check they are OK to view this page (`pages` auth_level > $_SESSION['user_level'])
+3. Check super vars:
     1. user_ID
     2. TNX_ID
     3. user_TNX_ID (get, or set to $_SESSION['user_ID'])
     4. transactTime (get, or set to now)
-        > if set, set rate: rate(transactTime) - (((hi-lo)/2) + lo)
-    5. totalUsers(transactTime)
+        a. when set, set rate: rate(transactTime) - (((hi-lo)/2) + lo)
+ 5. set totalUsers(transactTime) (lower priority 'fun' info)
  
 _________________________________________________________________________________________
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // 
@@ -208,6 +208,8 @@ ________________________________________________________________________________
         c. ((user AUM share * splits_to_VIPs) * withdrawalFee)
         d. save splits & fees to DB
     4. backup_site
+    5. import_TNX
+    6. import_historical_data
     
 _________________________________________________________________________________________
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //  
@@ -219,6 +221,9 @@ ________________________________________________________________________________
           > start_page_load_time();
       2. page_foot();
       3. main_menu();
+      4. beautyBox();
+      5. big_info_box();
+      6. wide_info_box();
       
     
 _________________________________________________________________________________________
@@ -240,9 +245,9 @@ ________________________________________________________________________________
 10. system_functions 
       1. register >> submit_registration >> email
       2. log_in >> log_in_check_do
+      3. reset_pwd
+      4. 
       
-      
- 
 _________________________________________________________________________________________
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // 
